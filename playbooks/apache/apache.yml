@@ -1,0 +1,16 @@
+---
+- hosts: web
+  tasks:
+  - name: Deploy Apache
+    yum: pkg=httpd state=latest
+  - name: Apache Config File
+    copy: src=files/httpd.conf dest=/etc/httpd/conf/httpd.conf
+    notify:
+    - config file update
+  - name: Apache Content File
+    template: src=templates/index.html.j2 dest=/var/www/html/index.html mode=0644
+  - name: Apache Service Runs
+    service: name=httpd state=started
+  handlers:
+    - name: config file update
+      service: name=httpd state=restarted

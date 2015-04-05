@@ -1,0 +1,6 @@
+---
+- hosts: db
+  roles:
+#     - base
+   - db
+     # - { role: db, dbpasswd: 'ansibleabc'}

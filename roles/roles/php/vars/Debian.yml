@@ -1,0 +1,6 @@
+---
+webserver: 'apache2'
+phppkg:
+  - php5
+  - php5-mysql
+phppath: '/var/www/index.php'

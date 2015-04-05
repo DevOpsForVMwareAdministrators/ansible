@@ -1,0 +1,14 @@
+#jinja2:  variable_start_string: '[%' , variable_end_string: '%]'
+<html>
+<head><title>DevOps for VMware Administrators</title></head>
+<body><h1>Ansible Rocks!</h1>
+<p>This is the default web page for
+{# Print the correct Operating System name with the right article i.e. "a" vs "an"#}
+{% if ansible_distribution[0].lower() in "aeiou" %}
+  an
+{% else %}
+  a
+{% endif %}
+<b> [% ansible_distribution %] </b> server.</p>
+<p>The web server software is running and content has been added by your <b>Ansible</b> code.</p>
+</body></html>

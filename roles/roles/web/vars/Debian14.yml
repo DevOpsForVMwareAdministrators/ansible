@@ -1,0 +1,5 @@
+---
+webserver: 'apache2'
+conffile: 'apache2.conf'
+confpath: '/etc/apache2/apache2.conf'
+contentpath: '/var/www/index.html'

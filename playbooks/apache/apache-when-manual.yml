@@ -1,0 +1,45 @@
+---
+- hosts: web
+  tasks:
+# Deploy the Web Server
+  - name: Deploy Apache for Red Hat Systems
+    yum: pkg=httpd state=latest
+    when: ansible_os_family == 'RedHat'
+  - name: Deploy Apache for Debian Systems
+    apt: pkg=apache2 state=latest
+    when: ansible_os_family == 'Debian'
+
+# Copy the correct Config File
+  - name: Apache Config File for Red Hat Systems
+    copy: src=files/'httpd.conf' dest='/etc/httpd/conf/httpd.conf'
+    notify:
+    - config file update redhat
+    when: ansible_os_family == 'RedHat'
+  - name: Apache Config File for Debian Systems
+    copy: src=files/'apache2.conf' dest='/etc/apache2/apache2.conf'
+    notify:
+    - config file update debian
+    when: ansible_os_family == 'Debian'
+
+# Generate the correct Web Content
+  - name: Apache Content File for Red Hat Systems
+    template: src=templates/index.html.j2 dest='/var/www/html/index.html' mode=0644
+    when: ansible_os_family == 'RedHat'
+  - name: Apache Content File for Debian Systems
+    template: src=templates/index.html.j2 dest='/var/www/index.html' mode=0644
+    when: ansible_os_family == 'Debian'
+
+# Verify Web Service is running
+  - name: Apache Service Runs for Red Hat Systems
+    service: name='httpd' state=started
+    when: ansible_os_family == 'RedHat'
+  - name: Apache Service Runs for Debian Systems
+    service: name='apache2' state=started
+    when: ansible_os_family == 'Debian'
+
+# Restart Web Service in response to config file change 
+  handlers:
+    - name: config file update redhat
+      service: name=httpd state=restarted
+    - name: config file update debian
+      service: name=apache2 state=restarted

@@ -1,0 +1,11 @@
+---
+- hosts: web
+  roles:
+     - base
+     - web
+     - php
+- hosts: db
+  roles:
+     - base
+#    - db
+     - { role: db, dbpasswd: 'ansibleabc'}

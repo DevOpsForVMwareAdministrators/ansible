@@ -1,0 +1,6 @@
+---
+webserver: 'httpd'
+phppkg:
+  - php
+  - php-mysql
+phppath: '/var/www/html/index.php'

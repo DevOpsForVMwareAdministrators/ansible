@@ -1,0 +1,5 @@
+---
+webserver: 'httpd'
+conffile: 'httpd.conf'
+confpath: '/etc/httpd/conf/httpd.conf'
+contentpath: '/var/www/html/index.html'

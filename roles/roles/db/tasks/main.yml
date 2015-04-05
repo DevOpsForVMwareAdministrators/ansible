@@ -1,0 +1,28 @@
+---
+  - include_vars: "{{ item }}"
+    with_first_found:
+     - "{{ ansible_os_family }}{{ ansible_distribution_major_version }}.yml"
+     - "{{ ansible_os_family }}.yml"
+
+  - name: Deploy MySQL for Red Hat Systems
+    yum: pkg={{ item }} state=latest
+    with_items: dbpkg
+    when: ansible_os_family == 'RedHat'
+
+  - name: Deploy MySQL for Debian Systems
+    apt: pkg={{ item }} state=latest
+    with_items: dbpkg
+    when: ansible_os_family == 'Debian'
+
+  - name: MySQL Service Runs
+    service: name={{ dbservice }} state=started
+
+  - name: Configure MySQL root password
+    mysql_user: name=root password={{ dbpasswd }}
+    ignore_errors: yes
+
+  - name: MySQL DB Create
+    mysql_db: name=test state=present login_user=root login_password={{ dbpasswd }}
+
+  - name: Set User Permission
+    mysql_user: name=ansible password=ansiblerocks priv=test.*:ALL,GRANT state=present login_user=root login_password={{ dbpasswd }}
