@@ -1,6 +1,0 @@
----
-dbpkg:
-  - mariadb
-  - mariadb-server
-  - MySQL-python
-dbservice: 'mariadb'

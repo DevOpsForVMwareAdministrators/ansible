@@ -1,5 +1,0 @@
----
-dbpkg:
-  - mysql-server
-  - MySQL-python
-dbservice: 'mysqld'

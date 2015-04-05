@@ -7,5 +7,6 @@
 - hosts: db
   roles:
      - base
-#    - db
+   # Either use "- db" or the parameriterized call below
+     # - db
      - { role: db, dbpasswd: 'ansibleabc'}
