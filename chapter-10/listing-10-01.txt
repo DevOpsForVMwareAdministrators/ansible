@@ -1,0 +1,11 @@
+[web]
+mnode01.devops.local
+mnode03.devops.local
+
+[db]
+mnode02.devops.local
+mnode04.devops.local
+
+[missioncritical:children]
+web
+db

@@ -1,0 +1,5 @@
+# Sample commands
+ansible all -m ping
+ansible mnode02.devops.local -m command -a '/sbin/reboot'
+ansible web -m user -a 'name=vmtrooper state=present comment="Test" uid=1000'
+ansible web -m user -a 'name=vmtrooper state=absent remove=yes'

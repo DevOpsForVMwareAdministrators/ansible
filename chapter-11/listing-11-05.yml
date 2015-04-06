@@ -1,0 +1,13 @@
+#/etc/ansible/roles/db/vars/RedHat.yml
+---
+dbpkg:
+  - mysql-server
+  - MySQL-python
+dbservice: 'mysqld'
+
+#/etc/ansible/roles/db/vars/Debian.yml
+---
+dbpkg:
+  - mysql-server
+  - python-mysqldb
+dbservice: 'mysql'

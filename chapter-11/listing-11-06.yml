@@ -1,0 +1,8 @@
+#Playbook YAML file in your working directory that references the db role
+# ~/db.yml
+---
+- hosts: db
+  roles:
+   # Either use "- db" or the parameriterized call below
+   # - db
+   - { role: db, dbpasswd: 'ansibleabc'}

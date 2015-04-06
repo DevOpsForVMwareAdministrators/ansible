@@ -1,0 +1,12 @@
+---
+- hosts: web
+  roles:
+     - base
+     - web
+     - php
+- hosts: db
+  roles:
+     - base
+   # Either use "- db" or the parameriterized call below
+     - db
+     # - { role: db, dbpasswd: 'ansibleabc'}

@@ -1,0 +1,13 @@
+#RedHat.yml
+---
+webserver: 'httpd'
+conffile: 'httpd.conf'
+confpath: '/etc/httpd/conf/httpd.conf'
+contentpath: '/var/www/html/index.html'
+
+#Debian.yml
+---
+webserver: 'apache2'
+conffile: 'apache2.conf'
+confpath: '/etc/apache2/apache2.conf'
+contentpath: '/var/www/index.html'

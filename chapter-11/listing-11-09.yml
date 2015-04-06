@@ -1,0 +1,6 @@
+#/etc/ansible/roles/ntp/vars/RedHat.yml
+---
+ntpserver: 'ntpd'
+#/etc/ansible/roles/ntp/vars/Debian.yml
+---
+ntpserver: 'ntp'

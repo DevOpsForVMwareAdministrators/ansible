@@ -1,0 +1,16 @@
+#/etc/ansible/roles/php/vars/RedHat.yml
+---
+webserver: 'httpd'
+phppkg:
+  - php
+  - php-mysql
+phppath: '/var/www/html/index.php'
+
+
+#/etc/ansible/roles/php/vars/Debian.yml
+---
+webserver: 'apache2'
+phppkg:
+  - php5
+  - php5-mysql
+phppath: '/var/www/index.php'

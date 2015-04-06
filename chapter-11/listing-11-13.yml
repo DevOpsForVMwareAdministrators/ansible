@@ -1,0 +1,26 @@
+- hosts: vmware
+  tasks:
+    - name: Deploy pip for Ubuntu Servers
+      apt: pkg=python-pip state=latest
+      when: ansible_os_family == 'Debian'
+    - name: Deploy pip for Red Hat Systems
+      yum: pkg=python-pip state=latest
+      when: ansible_os_family == 'RedHat'
+    - name: Deploy the pysphere Python package
+      pip: name=pysphere
+    - name: Deploy an Ubuntu VM on VMware vSphere
+      vsphere_guest:
+        vcenter_hostname: vcenter.devwidgets.io
+        username: vmtrooper@devwidgets.io
+        password: devopsrocks123
+        guest: web server 01
+￼￼￼￼￼￼￼￼state: reconfigured
+        vm_extra_config:
+          notes: This is an updated web server to run Apache in production
+        vm_hardware:
+          memory_mb: 1024
+          num_cpus: 2
+        esxi:
+          datacenter: Production
+          hostname: vsphere01.devwidgets.io
+        force: yes

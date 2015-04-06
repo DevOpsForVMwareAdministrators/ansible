@@ -1,8 +1,6 @@
+#web/tasks/main.yml
 ---
-- hosts: web
-  vars_files:
-  - "vars/{{ ansible_os_family }}.yml"
-  tasks:
+  - include_vars: "{{ ansible_os_family }}.yml"
   - name: Deploy Apache for Red Hat Systems
     yum: pkg=httpd state=latest
     when: ansible_os_family == 'RedHat'
@@ -10,13 +8,14 @@
     apt: pkg=apache2 state=latest
     when: ansible_os_family == 'Debian'
   - name: Apache Config File
-    copy: src=files/{{ conffile }} dest={{ confpath }}
+    copy: src={{ conffile }} dest={{ confpath }}
     notify:
     - restart httpd
-  - name: Apache Content File
-    template: src=templates/index.html.j2 dest={{ contentpath }} mode=0644
   - name: Apache Service Runs
     service: name={{ webserver }} state=started
-  handlers:
-    - name: restart httpd
-      service: name={{ webserver }} state=restarted
+
+#web/handlers/main.yml
+---
+  - include_vars: "{{ ansible_os_family }}.yml"
+  - name: restart httpd
+    service: name={{ webserver }} state=restarted

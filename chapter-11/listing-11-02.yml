@@ -1,0 +1,17 @@
+---
+  - include_vars: "{{ ansible_os_family }}.yml"
+  - name: Deploy PHP packages for Red Hat Systems
+    yum: pkg={{ item }} state=latest
+    with_items: phppkg
+    when: ansible_os_family == 'RedHat'
+    
+  - name: Deploy PHP packages for Debian Systems
+    apt: pkg={{ item }} state=latest
+    with_items: phppkg
+    when: ansible_os_family == 'Debian'
+
+  - name: Restart Apache after deploying PHP
+    service: name={{ webserver }} state=restarted
+
+  - name: PHP Content File
+    copy: src=index.php dest={{ phppath }}
